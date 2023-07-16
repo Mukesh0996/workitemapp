@@ -1,0 +1,43 @@
+
+.todo_form_div {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.todo_form {
+    margin-top: 5rem;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.todo_form input {
+    padding: .75rem;
+    border: none;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    font-family: 'Roboto';
+    min-width: 50%;
+}
+
+.todo_form input::placeholder {
+    font-style: italic;
+}
+
+.submit_btn{
+    padding: 12.5px;
+    outline: none;
+    border:  none;
+    background: #111827;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    letter-spacing: 2px;
+}
+
+.submit_btn:hover {
+    background-color: #020409;
+    cursor: pointer;
+}

@@ -1,0 +1,117 @@
+.container {
+    width: 100vw;
+    height: 30vw;
+    margin-top: 6rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.container_child {
+    width: 25vw;
+    height: 100%;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.container_status {
+    position: sticky;
+    top: 0px;
+    padding: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.container_completed_status {
+    background-color: #082f49;
+}
+
+.container_pending_status {
+    background-color:#0f172a;
+}
+
+.pending {
+    background-color:#082f49;
+}
+
+.pending_todo_item {
+    background-color: #082f49;
+}
+
+.completed {
+    background-color:#1e293b;
+}
+
+.completed_todo_item {
+    background-color: #082f49;
+}
+
+
+
+.TodoCategoryContainerStyles.todo_item .TodoCategoryContainerStyles.todo_item.pendingtodo {
+    background-color: #082f49;
+}
+
+
+.todo_item {
+    padding: .5rem;
+    border: .2px solid #9ca3af;
+    border-left: none;
+    border-right: none;
+    position: relative;
+}
+
+.todo_item:hover {
+    cursor: move;
+}
+
+.todoText {
+    letter-spacing: 3px;
+    text-transform: capitalize;
+}
+.status {
+    display: inline-block;
+    letter-spacing: 5px;
+    font-size: small;
+    text-transform: capitalize;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.pendingstatus {
+    color: #fca5a5;
+}
+
+.completedstatus {
+    color: #93c5fd;
+}
+
+
+.over {
+    border: 1px dashed #ccc;
+}
+
+.deleteicon {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    color: #fca5a5;
+    transition: all 0.1s;
+    width: 25px;
+    height: 25px;
+    padding: 3px 5.5px;
+    border-radius: 50%;
+    transition: 0.25s all;
+}
+
+.deleteicon:hover {
+    color: #f87171;
+    background: #fca5a5;
+    cursor: pointer;
+}
+
+.fade {
+    opacity: 0;
+    transition: 1s ease all;
+}
