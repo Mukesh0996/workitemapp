@@ -17,16 +17,17 @@ function App() {
       localStorage.setItem('todo_items', JSON.stringify(todolist_items));
     }
     setTodolist_items(todos);
+
   },[]);
 
-  const addItemToListHandler = (todo) => {  
-    setTodolist_items((prevState)=> [...prevState, todo]); // update state
+  const addItemToListHandler = (addedTodo) => {  
+    setTodolist_items(()=> [...todolist_items, addedTodo]); // update state
     setTodos(todolist_items); //add todo to localstorge
   };
 
-  setInterval(() => {
-    console.log(new Date().toLocaleTimeString());
-  }, 1000)
+  // setInterval(() => {
+  //   console.log(new Date().toLocaleTimeString());
+  // }, 1000)
 
   return (
     <div className="App">

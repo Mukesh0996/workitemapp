@@ -17,7 +17,6 @@ const TodoForm = ({addItemHandler}) => {
         if(e.target.value !== "") {
             setWorkItem({...workItem, [e.target.name]: e.target.value, status: "pending", id: new Date().getTime().toString()});
         }
-     
     };
    
     return (
@@ -27,7 +26,7 @@ const TodoForm = ({addItemHandler}) => {
                 className="todo_item" 
                 name="todo_item"
                 placeholder='Enter your work item....' 
-                onChange={updateData} value={workItem.todo_item}/>
+                onChange={updateData} value={workItem.todo_item} autoComplete='false'/>
                 <button className={todoFormStyle.submit_btn} type='submit'>Add Todo</button>
             </form>
 

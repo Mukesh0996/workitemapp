@@ -6,18 +6,22 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const TodoCategory = ({ status, todos, updateTodos }) => {
 
+    let innerHtml;
+        // styles if todo status is pending
     let classStyles = `${TodoCategoryContainerStyles.container_child} ${TodoCategoryContainerStyles.pending}`;
     let categoryText = "Pending";
     let Category = `${TodoCategoryContainerStyles.container_status} ${TodoCategoryContainerStyles.container_pending_status}`;
 
+    // styles if todo status is completed
     if(status === "completed") {  
         classStyles = `${TodoCategoryContainerStyles.container_child} ${TodoCategoryContainerStyles.completed}`;
         categoryText = "Completed";
         Category = `${TodoCategoryContainerStyles.container_status} ${TodoCategoryContainerStyles.container_completed_status}`;
     }   
-    let innerHtml;
-     const filteredTodos = todos.filter((todo) => todo.status === status);
+  
+    const filteredTodos = todos.filter((todo) => todo.status === status);
 
+    // function to handle CSS styles when user has started dragging the HTML element
     function handleDragStart(e) {
         let target = e.currentTarget
         target.style.opacity = '0.2';
@@ -29,7 +33,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
     function handleDragOver (e) {
         e.preventDefault();
     }
-
+    // function to remove CSS styles when the user has dropped the HTML element
     function handleDragEnd (e) {
         e.currentTarget.style.opacity = "";
         e.currentTarget.classList.remove(TodoCategoryContainerStyles.over); 
@@ -43,8 +47,13 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
         e.preventDefault();
         let processTodos = [...todos], status, processedTodos; 
         const data = e.dataTransfer.getData("Text");
-        let requiredTodo = processTodos.find((todo, index) => todo.id === data);
-        if(requiredTodo.status === "completed") {
+        // find the required todo
+        let requiredTodo = processTodos.find((todo) => todo.id === data);
+        let statusCheck = e.currentTarget.getAttribute('data-todo-status');
+        
+        if(requiredTodo.status.toLowerCase() === statusCheck.toLowerCase()){
+            return;
+        } else if(requiredTodo.status === "completed") {
             status = 'pending';
         } else {
             status = 'completed';
@@ -66,12 +75,13 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
 
     const onSuccesshandler = (updatedTodoList) => {
        updateTodos(updatedTodoList)
-
     }
+    // if else condition to display content appropriate html content if todos are present/ not present
     if(filteredTodos.length === 0) {
 
-       innerHtml = <h4 style={{marginTop:'41%', textAlign:'center', textTransform:'capitalize', fontStyle:'italic', fontWeight:'lighter'}}>No {status} todos available</h4>
-   
+       innerHtml = <h4 style={{marginTop:'41%', textAlign:'center', textTransform:'capitalize', fontStyle:'italic', fontWeight:'lighter'}}>
+                        No {status} todos available
+                    </h4>
     } else {
 
         innerHtml = filteredTodos.map((todo, index)=> <div data-todo-status={`${todo.status === "completed" ? 'completed' : 'pending' }`}
@@ -90,7 +100,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
     );
     }
 
-    return ( <div className={classStyles} onDrop={handleDrop}  onDragOver={handleDragOver} >
+    return ( <div data-todo-status={status} className={classStyles} onDrop={handleDrop}  onDragOver={handleDragOver} >
                 <div className={Category}>{categoryText}</div>
                 {
                     innerHtml
