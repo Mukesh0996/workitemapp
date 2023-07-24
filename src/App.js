@@ -22,7 +22,9 @@ function App() {
 
   const addItemToListHandler = (addedTodo) => {  
     setTodolist_items(()=> [...todolist_items, addedTodo]); // update state
+    console.log(addedTodo);
     setTodos(todolist_items); //add todo to localstorge
+    console.log(todolist_items);
   };
 
   // setInterval(() => {

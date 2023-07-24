@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteTodo, setTodos } from '../../Utils/ex';
 import TodoCategoryContainerStyles from './TodoCategory.module.css';
-import React from 'react';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const TodoCategory = ({ status, todos, updateTodos }) => {
@@ -24,6 +23,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
     // function to handle CSS styles when user has started dragging the HTML element
     function handleDragStart(e) {
         let target = e.currentTarget
+        let todoStatus = e.currentTarget.getAttribute('data-todo-status');
         target.style.opacity = '0.2';
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData("Text", e.target.id);
@@ -32,6 +32,8 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
 
     function handleDragOver (e) {
         e.preventDefault();
+        e.target.classList.add(TodoCategoryContainerStyles.over); 
+
     }
     // function to remove CSS styles when the user has dropped the HTML element
     function handleDragEnd (e) {
@@ -45,7 +47,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
 
     function handleDrop (e) {
         e.preventDefault();
-        let processTodos = [...todos], status, processedTodos; 
+        let processTodos = [...todos], status, processedTodos;
         const data = e.dataTransfer.getData("Text");
         // find the required todo
         let requiredTodo = processTodos.find((todo) => todo.id === data);
@@ -69,8 +71,8 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
 
       setTimeout(() => {
         e.target.appendChild(document.getElementById(data));
+        e.target.classList.remove(TodoCategoryContainerStyles.over);
       }, 100);
-
     }
 
     const onSuccesshandler = (updatedTodoList) => {
@@ -78,15 +80,13 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
     }
     // if else condition to display content appropriate html content if todos are present/ not present
     if(filteredTodos.length === 0) {
-
        innerHtml = <h4 style={{marginTop:'41%', textAlign:'center', textTransform:'capitalize', fontStyle:'italic', fontWeight:'lighter'}}>
                         No {status} todos available
-                    </h4>
+                    </h4>;
     } else {
 
         innerHtml = filteredTodos.map((todo, index)=> <div data-todo-status={`${todo.status === "completed" ? 'completed' : 'pending' }`}
         onDragStart={handleDragStart} 
-        onDragLeave={handleDragLeave} 
         onDragEnd={handleDragEnd} 
         key={index}
         id={todo.id}
@@ -100,7 +100,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
     );
     }
 
-    return ( <div data-todo-status={status} className={classStyles} onDrop={handleDrop}  onDragOver={handleDragOver} >
+    return ( <div data-todo-status={status} className={classStyles} onDragLeave={handleDragLeave} onDrop={handleDrop}  onDragOver={handleDragOver} >
                 <div className={Category}>{categoryText}</div>
                 {
                     innerHtml
