@@ -11,3 +11,13 @@
     font-style: italic;
     letter-spacing: 2px;
   }
+
+  .date{
+    position: absolute;
+    top:32px;
+    right: 10px;
+    font-weight: 900;
+    font-size: large;
+    font-style: italic;
+    color: #a1a1aa;
+  }
