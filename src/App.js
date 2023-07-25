@@ -25,25 +25,6 @@ function App() {
     setTodos(todolist_items); //add todo to localstorge
   };
 
-  // setInterval(() => {
-  //   let date = new Date();
-  //   let hours = date.getHours();
-  //   let minutes = date.getMinutes();
-  //   let seconds = date.getSeconds();
-  //   let meri = "AM"
-
-  //   if(hours >12) {
-  //     hours = hours - 12;
-  //     meri = "PM"
-  //   }
-
-  //   if(seconds < 10) {
-  //     seconds = "0" + seconds;
-  //   }
-
-  //   console.log(`${hours}:${minutes}:${seconds} ${meri}` );
-  // }, 1000);
-
   return (
     <div className="App">
       <Header/>
