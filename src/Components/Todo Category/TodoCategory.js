@@ -18,6 +18,20 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
         Category = `${TodoCategoryContainerStyles.container_status} ${TodoCategoryContainerStyles.container_completed_status}`;
     }   
   
+    function getDate(todoStatus)  {
+        let date = new Date();
+        let dd = date.getDate();
+        let mm = date.getMonth() + 1;
+        let yy = date.getFullYear();
+        if(dd < 10) {
+            dd = "0" + dd;
+        }
+        if(mm< 10) {
+            mm = "0"+ mm;
+        }
+        return `${yy}-${mm}-${dd}`;
+    }
+    console.log(getDate());
     const filteredTodos = todos.filter((todo) => todo.status === status);
 
     // function to handle CSS styles when user has started dragging the HTML element
@@ -60,6 +74,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
             status = 'pending';
         } else {
             status = 'completed';
+            requiredTodo.todo_deadline = getDate(requiredTodo.status);
         }
       requiredTodo = {
         ...requiredTodo,
@@ -92,7 +107,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
         id={todo.id}
         className={`${TodoCategoryContainerStyles.todo_item} ${todo.status === 'pending' ? TodoCategoryContainerStyles.pending_todo_item : TodoCategoryContainerStyles.completed_todo_item}`} draggable={true}> 
         <h4 className={TodoCategoryContainerStyles.todoText}>{todo.todo_item}</h4> 
-        <span></span>
+        { todo.status ==="pending" ? <span className={TodoCategoryContainerStyles.duedate}> Due By - {todo.todo_deadline} </span> : <span className={TodoCategoryContainerStyles.duedate}> Completed On - {todo.todo_deadline} </span>}
         <span className={`${TodoCategoryContainerStyles.status} ${todo.status === 'pending' ? TodoCategoryContainerStyles.pendingstatus : TodoCategoryContainerStyles.completedstatus}`}>{todo.status}</span>  
         <div className={TodoCategoryContainerStyles.deleteicon} onClick={()=> {deleteTodo(todo.id , onSuccesshandler)}}>
          <FontAwesomeIcon icon={faTrash} />
