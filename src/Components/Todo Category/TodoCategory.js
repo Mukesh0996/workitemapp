@@ -18,7 +18,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
         Category = `${TodoCategoryContainerStyles.container_status} ${TodoCategoryContainerStyles.container_completed_status}`;
     }   
   
-    function getDate(todoStatus)  {
+    function getDate()  {
         let date = new Date();
         let dd = date.getDate();
         let mm = date.getMonth() + 1;
@@ -74,7 +74,7 @@ const TodoCategory = ({ status, todos, updateTodos }) => {
             status = 'pending';
         } else {
             status = 'completed';
-            requiredTodo.todo_deadline = getDate(requiredTodo.status);
+            requiredTodo.todo_deadline = getDate();
         }
       requiredTodo = {
         ...requiredTodo,
